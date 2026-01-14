@@ -153,17 +153,17 @@ public class MostrarMantenimientosView {
     }
 
     private TableView<MantenimientoData> construirTabla() {
-        TableView<MantenimientoData> tabla = new TableView<>();
+        tabla = new TableView<>();              // asignamos el campo
         tabla.setItems(mantenimientos);
         tabla.setPrefHeight(420);
         tabla.setPlaceholder(new Label("No hay visitas que coincidan con el filtro."));
-
+    
         TableColumn<MantenimientoData, Integer> colId = crearColumna("ID", "id", 70);
         TableColumn<MantenimientoData, String> colFecha = crearColumna("Fecha", "fecha", 130);
         TableColumn<MantenimientoData, String> colActividad = crearColumna("Actividad", "tipoActividad", 150);
         TableColumn<MantenimientoData, Integer> colEstacion = crearColumna("Estación", "codigoEstacion", 110);
         TableColumn<MantenimientoData, String> colObs = crearColumna("Observaciones", "observaciones", 300);
-
+    
         colActividad.setCellFactory(col -> new TableCell<>() {
             @Override
             protected void updateItem(String actividad, boolean empty) {
@@ -183,7 +183,7 @@ public class MostrarMantenimientosView {
                 }
             }
         });
-
+    
         agregarColumnas(colId, colFecha, colActividad, colEstacion, colObs);
         return tabla;
     }
