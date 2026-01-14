@@ -52,11 +52,9 @@ public class UtilidadReportes implements CRUDOperations<Incidente> {
     }
 
     // Keep your existing specific methods
-    public boolean insertarIncidente(Date fecha, TipoProblema tipo, EstadoReporte estado,
-                                     Severidad severidad, String descripcion, int codigoEstacion) {
+    public void insertarIncidente(Date fecha, TipoProblema tipo, EstadoReporte estado, Severidad severidad, String descripcion, int codigoEstacion) {
         Incidente incidente = new Incidente(fecha, tipo, estado, severidad, descripcion, codigoEstacion);
         insertar(incidente);
-        return true;
     }
 
     public boolean actualizarEstadoIncidente(int idIncidente, EstadoReporte nuevoEstado) {

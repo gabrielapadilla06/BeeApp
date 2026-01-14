@@ -197,7 +197,7 @@ public class UtilsDB {
                 estaciones.add(estacion);
             }
         } catch (Exception e) {
-            e.printStackTrace(); // or throw a custom exception
+            e.printStackTrace();
         }
         return estaciones;
     }
@@ -427,36 +427,5 @@ public class UtilsDB {
             e.printStackTrace();
         }
         return visitas;
-    }
-
-    public static List<SolicitudInstalacion> obtenerSolicitudes() {
-        List<SolicitudInstalacion> solicitudes = new ArrayList<>();
-        String sql = """
-                SELECT id, id_usuario, tipo_estacion, ubicacion,
-                       estado_solicitud, costo_estimado, fecha_solicitud
-                FROM solicitud_instalacion
-                ORDER BY fecha_solicitud DESC
-                """;
-    
-        try (Connection conn = UtilsDB.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-    
-            while (rs.next()) {
-                SolicitudInstalacion solicitud = new SolicitudInstalacion(
-                        rs.getInt("id_usuario"),
-                        TipoEstacion.valueOf(rs.getString("tipo_estacion")),
-                        rs.getString("ubicacion"),
-                        EstadoSolicitud.valueOf(rs.getString("estado_solicitud")),
-                        rs.getDouble("costo_estimado"),
-                        rs.getDate("fecha_solicitud")
-                );
-                solicitud.setId(rs.getInt("id"));
-                solicitudes.add(solicitud);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return solicitudes;
     }
 }
